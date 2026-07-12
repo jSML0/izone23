@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- rebuild GitHub Pages -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
     <style>
         :root {
             --canvas: #05140f;          
@@ -46,15 +46,30 @@
         }
 
         .logo {
-            font-family: 'Antonio', sans-serif;
-            font-size: 1.75rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            line-height: 1;
+            display: inline-flex;
+            align-items: center;
+            width: clamp(84px, 10vw, 132px);
+            line-height: 0;
+            text-decoration: none;
         }
 
-        .logo span {
-            color: var(--accent);
+        .logo img {
+            display: block;
+            width: 100%;
+            height: auto;
+            transform-origin: center;
+            will-change: transform;
+        }
+
+        .logo:hover img,
+        .logo:focus-visible img {
+            animation: logo-slow-spin 14s linear infinite;
+        }
+
+        @keyframes logo-slow-spin {
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         .viewport-section {
@@ -273,8 +288,13 @@
 </head>
 <body>
 
-    <header>
-        <div class="logo">izone<span>23</span></div>
+    <header class="site-header">
+        <a class="logo" href="index.html" aria-label="IZONE23 home">
+            <img src="izone23-logo-animated.svg" alt="IZONE23 logo">
+        </a>
+        <nav class="site-nav" aria-label="Primary navigation">
+            <a href="enquiry.html">Enquiry</a>
+        </nav>
     </header>
 
     <section class="viewport-section">
@@ -317,13 +337,11 @@
 
     <section class="action-container">
         <span class="eyebrow" style="margin-bottom: 2rem;">Development Status: Structural Lock</span>
-        <button class="ghost-btn" onclick="alert('Press Ctrl + D (or Cmd + D on Mac) to bookmark the system coordinate.')">
-            Bookmark Live Node
-        </button>
+        <a class="ghost-btn" href="enquiry.html">Start an Enquiry</a>
         <p class="bookmark-alert">// Secure the terminal to track upcoming module deployments.</p>
     </section>
 
-    <footer>
+    <footer class="site-footer">
         <div>// IZONE23 © 2026</div>
         <div>STATUS: ACTIVE // COMING SOON</div>
     </footer>

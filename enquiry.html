@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enquiry // IZONE23</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        #enquiry-dismissed {
+            display: none;
+        }
+
+        #enquiry-dismissed:target {
+            display: block !important;
+        }
+
+        #enquiry-dismissed:target + #enquiry-widget {
+            display: none !important;
+        }
+
+        #dismiss-enquiry-widget {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            z-index: 999;
+            width: 3rem;
+            height: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <a class="logo" href="index.html" aria-label="IZONE23 home">
+            <img src="izone23-logo-animated.svg" alt="IZONE23 logo">
+        </a>
+        <nav class="site-nav" aria-label="Primary navigation">
+            <a href="enquiry.html" aria-current="page">Enquiry</a>
+        </nav>
+    </header>
+
+    <main class="page-shell enquiry-page">
+        <section class="enquiry-layout" aria-labelledby="enquiry-title">
+            <div class="enquiry-intro">
+                <span class="eyebrow">Enquiry Channel</span>
+                <h1 id="enquiry-title">Start the Conversation.</h1>
+                <p>
+                    Tell us what you are building, learning, automating, or untangling. We will review the context and respond with the next practical step.
+                </p>
+                <p class="contact-alternative">
+                    Prefer email? Send details to
+                    <a href="mailto:enquiries@izone23.com">enquiries@izone23.com</a>.
+                </p>
+            </div>
+
+            <div class="enquiry-widget-shell">
+                <div class="widget-dismissed" id="enquiry-dismissed" tabindex="-1">
+                    <span class="eyebrow">Enquiry Closed</span>
+                    <p>No problem. You can return to the homepage or reopen this page whenever you are ready.</p>
+                    <a class="ghost-btn" href="index.html">Return to Main Site</a>
+                </div>
+
+                <div class="contact-widget" id="enquiry-widget">
+                    <a
+                        class="widget-close"
+                        id="dismiss-enquiry-widget"
+                        href="#enquiry-dismissed"
+                        aria-label="Dismiss enquiry form"
+                        onclick="document.getElementById('enquiry-widget').style.display='none'; document.getElementById('enquiry-widget').hidden=true; document.getElementById('enquiry-dismissed').hidden=false; document.getElementById('enquiry-dismissed').style.display='block';"
+                    >&times;</a>
+
+                    <form action="https://formspree.io/f/xvzjerqk" method="POST" class="contact-form" id="enquiry-form">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    autocomplete="name"
+                                    minlength="2"
+                                    maxlength="80"
+                                    title="Enter your name using at least 2 letters."
+                                    required
+                                >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email address</label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    autocomplete="email"
+                                    maxlength="120"
+                                    title="Enter a valid email address."
+                                    required
+                                >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">Contact number</label>
+                                <input
+                                    type="tel"
+                                    id="phone"
+                                    name="phone"
+                                    autocomplete="tel"
+                                    inputmode="tel"
+                                    minlength="7"
+                                    maxlength="32"
+                                    pattern="[0-9+() .-]{7,32}"
+                                    title="Enter a valid contact number using 7 to 32 digits or phone symbols."
+                                    required
+                                >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="service">Type of enquiry</label>
+                                <select id="service" name="service" required>
+                                    <option value="" selected disabled>Please select</option>
+                                    <option value="General enquiry">General enquiry</option>
+                                    <option value="Training">Training</option>
+                                    <option value="Consulting">Consulting</option>
+                                    <option value="Collaboration">Collaboration</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="message">How can we help?</label>
+                                <textarea
+                                    id="message"
+                                    name="message"
+                                    rows="6"
+                                    minlength="20"
+                                    maxlength="2000"
+                                    title="Share at least 20 characters so we have enough context."
+                                    required
+                                ></textarea>
+                            </div>
+
+                            <div class="form-honeypot" aria-hidden="true">
+                                <label for="company-website">Leave this field blank</label>
+                                <input type="text" id="company-website" name="_gotcha" tabindex="-1" autocomplete="off">
+                            </div>
+
+                            <label class="consent-label">
+                                <input type="checkbox" name="privacy_consent" value="Yes" required>
+                                I consent to IZONE23 using the information provided to respond to this enquiry.
+                            </label>
+
+                            <button class="ghost-btn" type="submit">Send Enquiry</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div>// IZONE23 &copy; 2026</div>
+        <div>STATUS: ACTIVE // ENQUIRY CHANNEL OPEN</div>
+    </footer>
+
+    <script>
+        var enquiryForm = document.getElementById('enquiry-form');
+
+        var messages = {
+            name: 'Enter your name using at least 2 letters.',
+            email: 'Enter a valid email address.',
+            phone: 'Enter a valid contact number using 7 to 32 digits or phone symbols.',
+            service: 'Select the type of enquiry.',
+            message: 'Share at least 20 characters so we have enough context.',
+            privacy_consent: 'Confirm consent so we can respond to your enquiry.'
+        };
+
+        var fields = enquiryForm ? enquiryForm.querySelectorAll('input, select, textarea') : [];
+        var validators = {
+            name: function(field) { return field.value.trim().length >= 2; },
+            email: function(field) { return field.value.trim().length > 0 && field.validity.valid; },
+            phone: function(field) { return /^[0-9+() .-]{7,32}$/.test(field.value.trim()); },
+            service: function(field) { return field.value.trim().length > 0; },
+            message: function(field) { return field.value.trim().length >= 20; },
+            privacy_consent: function(field) { return field.checked; }
+        };
+
+        function validateField(field) {
+            field.setCustomValidity('');
+
+            if (!validators[field.name]) {
+                return true;
+            }
+
+            if (!validators[field.name](field)) {
+                field.setCustomValidity(messages[field.name]);
+                return false;
+            }
+
+            return true;
+        }
+
+        Array.prototype.forEach.call(fields, function(field) {
+            field.addEventListener('invalid', function() {
+                validateField(field);
+            });
+
+            field.addEventListener('input', function() {
+                validateField(field);
+            });
+
+            field.addEventListener('change', function() {
+                validateField(field);
+            });
+        });
+
+        if (enquiryForm) {
+            enquiryForm.addEventListener('submit', function(event) {
+                var firstInvalidField = null;
+
+                Array.prototype.forEach.call(fields, function(field) {
+                    if (!validateField(field) && !firstInvalidField) {
+                        firstInvalidField = field;
+                    }
+                });
+
+                if (!enquiryForm.checkValidity()) {
+                    event.preventDefault();
+
+                    if (firstInvalidField) {
+                        firstInvalidField.focus();
+                    }
+
+                    enquiryForm.reportValidity();
+                }
+            });
+        }
+    </script>
+</body>
+</html>
